@@ -3,71 +3,72 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:ed87afb33693eabdd946abfbf9e9fa0d46c6fa8dcf790c31050bd102ee01c2ec"
+  digest = "1:dc289d9e104745bfbf091834c0964f6eace1ccdfb5613266b722caac0ff9839e"
   name = "github.com/bdlm/errors"
   packages = ["."]
-  pruneopts = ""
-  revision = "e8da38949ffe2a1424d05ff004276c3fd57e0a30"
+  pruneopts = "UT"
+  revision = "d165b6114cc2ae2d83282a45792c73fc08d338c8"
 
 [[projects]]
   branch = "master"
-  digest = "1:229dccc6286f2dd642f3c217c56fa340bb8dbe0c7ca05512ad49102dfbab1840"
+  digest = "1:0d06a10576a170124ad6fc36d292e0423566fc87e0e0feaf2b2b7e9943f27f80"
   name = "github.com/bdlm/std"
   packages = [
     "error",
     "logger",
   ]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "ba3aa8890134f4246631d714d79a75f53fca0c53"
 
 [[projects]]
-  digest = "1:56c130d885a4aacae1dd9c7b71cfe39912c7ebc1ff7d2b46083c8812996dc43b"
+  digest = "1:a2c1d0e43bd3baaa071d1b9ed72c27d78169b2b269f71c105ac4ba34b1be4a39"
   name = "github.com/davecgh/go-spew"
   packages = ["spew"]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "346938d642f2ec3594ed81d874461961cd0faa76"
   version = "v1.1.0"
 
 [[projects]]
-  digest = "1:256484dbbcd271f9ecebc6795b2df8cad4c458dd0f5fd82a8c2fa0c29f233411"
+  digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
   name = "github.com/pmezard/go-difflib"
   packages = ["difflib"]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:c587772fb8ad29ad4db67575dad25ba17a51f072ff18a22b4f0257a4d9c24f75"
+  digest = "1:18752d0b95816a1b777505a97f71c7467a8445b8ffb55631a7bf779f6ba4fa83"
   name = "github.com/stretchr/testify"
   packages = ["assert"]
-  pruneopts = ""
+  pruneopts = "UT"
   revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
   version = "v1.2.2"
 
 [[projects]]
   branch = "master"
-  digest = "1:4cae11053a5fc8e7b08228fcc14d161d3e60b64ba508a8b216937da472690991"
+  digest = "1:3f3a05ae0b95893d90b9b3b5afdb79a9b3d96e4e36e099d841ae602e4aca0da8"
   name = "golang.org/x/crypto"
   packages = ["ssh/terminal"]
-  pruneopts = ""
-  revision = "de0752318171da717af4ce24d0a2e8626afaeb11"
+  pruneopts = "UT"
+  revision = "aabede6cba87e37f413b3e60ebfc214f8eeca1b0"
 
 [[projects]]
   branch = "master"
-  digest = "1:5e71cf351f5e98043af5f96dedc71c68d2214ce68332b8887d4e21d5fbc0f4c4"
+  digest = "1:2f71657f09ff05e4567909e9e0de7ad799828c96d402c540b41dc044a6590fb2"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
-  pruneopts = ""
-  revision = "14742f9018cd6651ec7364dc6ee08af0baaa1031"
+  pruneopts = "UT"
+  revision = "1c9583448a9c3aa0f9a6a5241bf73c0bd8aafded"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
     "github.com/bdlm/errors",
+    "github.com/bdlm/std/error",
     "github.com/bdlm/std/logger",
     "github.com/stretchr/testify/assert",
     "golang.org/x/crypto/ssh/terminal",

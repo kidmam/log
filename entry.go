@@ -9,6 +9,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/bdlm/errors"
 	stdError "github.com/bdlm/std/error"
 	"github.com/bdlm/std/logger"
 )
@@ -230,17 +231,19 @@ func (entry *Entry) Warning(args ...interface{}) {
 // Error logs a error-level message using Println.
 func (entry *Entry) Error(args ...interface{}) {
 	for _, arg := range args {
+		fmt.Printf("0: %T\n", arg.(errors.Err))
 		switch err := arg.(type) {
 		case stdError.Error:
 			fmt.Printf("1: %T\n", err)
+		case errors.Err:
+			fmt.Printf("2: %T\n", err)
+		case errors.Msg:
+			fmt.Printf("3: %T\n", err)
 		case error:
-			fmt.Printf("2: %T - %-v\n", err, err)
+			fmt.Printf("4: %T - %-v\n", err, err)
 		}
-		//if err, ok := tmp.(errors.Err); ok {
-		//	fmt.Printf("%+v\n", err)
-		//	entry.Errs = append(entry.Errs, err)
-		//}
 	}
+
 	if entry.Logger.level() >= ErrorLevel {
 		entry.log(ErrorLevel, fmt.Sprint(args...))
 	}
