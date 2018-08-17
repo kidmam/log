@@ -4,6 +4,10 @@
   branch = "master"
 
 [[constraint]]
+  name = "github.com/bdlm/errors"
+  branch = "master"
+
+[[constraint]]
   name = "github.com/stretchr/testify"
   version = "1.2.2"
 

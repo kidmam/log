@@ -9,6 +9,8 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+
+	"github.com/bdlm/errors"
 )
 
 // RFC3339Milli defines an RFC3339 date format with miliseconds
@@ -51,6 +53,7 @@ type logData struct {
 	Caller    string                 `json:"caller,omitempty"`
 	Color     string                 `json:"-"`
 	Data      map[string]interface{} `json:"data,omitempty"`
+	Errors    []string               `json:"error,omitempty"`
 	Hostname  string                 `json:"host,omitempty"`
 	Level     string                 `json:"level,omitempty"`
 	Message   string                 `json:"msg,omitempty"`
@@ -154,6 +157,22 @@ func getData(entry *Entry, fieldMap FieldMap, escapeHTML bool) *logData {
 		Message:   entry.Message,
 		Timestamp: entry.Time.Format(RFC3339Milli),
 		Trace:     getTrace(),
+	}
+
+	for _, err := range entry.Errs {
+		switch err := err.(type) {
+		case errors.Err:
+			fmt.Println("got here 1")
+			for _, msg := range err {
+				data.Errors = append(data.Errors, msg.Error())
+			}
+		case errors.Msg:
+			fmt.Println("got here 2")
+			data.Errors = append(data.Errors, err.Error())
+		default:
+			fmt.Println("got here 3")
+			data.Errors = append(data.Errors, err.Error())
+		}
 	}
 	remapData(entry, fieldMap, data)
 

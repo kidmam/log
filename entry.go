@@ -9,6 +9,7 @@ import (
 	"sync"
 	"time"
 
+	stdError "github.com/bdlm/std/error"
 	"github.com/bdlm/std/logger"
 )
 
@@ -30,22 +31,27 @@ var ErrorKey = "error"
 // Warn, Error, Fatal or Panic is called on it. These objects can be reused
 // and passed around as much as you wish to avoid field duplication.
 type Entry struct {
+	// Logger is a reference to the logger.
 	Logger *Logger
 
-	// Contains all the fields set by the user.
+	// Data contains all the fields set by the user.
 	Data Fields
 
-	// Time at which the log entry was created
+	// Errs
+	Errs []error
+
+	// Time at which the log entry was created.
 	Time time.Time
 
-	// Level the log entry was logged at: Debug, Info, Warn, Error, Fatal or Panic
-	// This field will be set on entry firing and the value will be equal to the one in Logger struct field.
+	// Level the log entry was logged at: Debug, Info, Warn, Error, Fatal or
+	// Panic. This field will be set on entry firing and the value will be
+	// equal to the one in Logger struct field.
 	Level logger.Level
 
-	// Message passed to Debug, Info, Warn, Error, Fatal or Panic
+	// Message passed to Debug, Info, Warn, Error, Fatal or Panic.
 	Message string
 
-	// When formatter is called in entry.log(), an Buffer may be set to entry
+	// Buffer is a custom log buffer.
 	Buffer *bytes.Buffer
 }
 
@@ -223,6 +229,18 @@ func (entry *Entry) Warning(args ...interface{}) {
 
 // Error logs a error-level message using Println.
 func (entry *Entry) Error(args ...interface{}) {
+	for _, arg := range args {
+		switch err := arg.(type) {
+		case stdError.Error:
+			fmt.Printf("1: %T\n", err)
+		case error:
+			fmt.Printf("2: %T - %-v\n", err, err)
+		}
+		//if err, ok := tmp.(errors.Err); ok {
+		//	fmt.Printf("%+v\n", err)
+		//	entry.Errs = append(entry.Errs, err)
+		//}
+	}
 	if entry.Logger.level() >= ErrorLevel {
 		entry.log(ErrorLevel, fmt.Sprint(args...))
 	}

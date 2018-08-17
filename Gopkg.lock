@@ -3,11 +3,22 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:214b2f1af454ab36b1ffc019bce6a74542c8d799462282eb009a9ea056d54297"
-  name = "github.com/bdlm/std"
-  packages = ["logger"]
+  digest = "1:ed87afb33693eabdd946abfbf9e9fa0d46c6fa8dcf790c31050bd102ee01c2ec"
+  name = "github.com/bdlm/errors"
+  packages = ["."]
   pruneopts = ""
-  revision = "115aeb0aea4476d378bdd53089a4948dc264fef8"
+  revision = "e8da38949ffe2a1424d05ff004276c3fd57e0a30"
+
+[[projects]]
+  branch = "master"
+  digest = "1:229dccc6286f2dd642f3c217c56fa340bb8dbe0c7ca05512ad49102dfbab1840"
+  name = "github.com/bdlm/std"
+  packages = [
+    "error",
+    "logger",
+  ]
+  pruneopts = ""
+  revision = "ba3aa8890134f4246631d714d79a75f53fca0c53"
 
 [[projects]]
   digest = "1:56c130d885a4aacae1dd9c7b71cfe39912c7ebc1ff7d2b46083c8812996dc43b"
@@ -43,19 +54,20 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:072dfe8c89af9499e94ba8174a3be40d1c217bc814662e57dda354e8fb47fac9"
+  digest = "1:5e71cf351f5e98043af5f96dedc71c68d2214ce68332b8887d4e21d5fbc0f4c4"
   name = "golang.org/x/sys"
   packages = [
     "unix",
     "windows",
   ]
   pruneopts = ""
-  revision = "98c5dad5d1a0e8a73845ecc8897d0bd56586511d"
+  revision = "14742f9018cd6651ec7364dc6ee08af0baaa1031"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/bdlm/errors",
     "github.com/bdlm/std/logger",
     "github.com/stretchr/testify/assert",
     "golang.org/x/crypto/ssh/terminal",
