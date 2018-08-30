@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"reflect"
 	"strings"
 	"sync"
 	"time"
 
-	"github.com/bdlm/errors"
+	bdlmErrors "github.com/bdlm/errors"
 	stdError "github.com/bdlm/std/error"
 	"github.com/bdlm/std/logger"
 )
@@ -231,16 +232,24 @@ func (entry *Entry) Warning(args ...interface{}) {
 // Error logs a error-level message using Println.
 func (entry *Entry) Error(args ...interface{}) {
 	for _, arg := range args {
-		fmt.Printf("0: %T\n", arg.(errors.Err))
+
 		switch err := arg.(type) {
 		case stdError.Error:
 			fmt.Printf("1: %T\n", err)
-		case errors.Err:
+		case bdlmErrors.Err:
 			fmt.Printf("2: %T\n", err)
-		case errors.Msg:
+		case bdlmErrors.Msg:
 			fmt.Printf("3: %T\n", err)
 		case error:
-			fmt.Printf("4: %T - %-v\n", err, err)
+			fmt.Printf("4: %T - %-v\n\n\n", err, err)
+			t := reflect.TypeOf(arg)
+			u := reflect.TypeOf(err)
+			fmt.Printf("!!2: %T (%v) %v - %v\n", arg, t.Kind(), t.Method(0), t.PkgPath())
+			fmt.Printf("!!2: %T (%v) %v - %v\n", err, u.Kind(), u.Method(0), u.PkgPath())
+
+			fmt.Printf("0: %T\n", arg.(bdlmErrors.Err))
+			//fmt.Printf("0: %T\n", arg.([]bdlmErrors.ErrMsg))
+			fmt.Printf("0: %T\n", arg.(stdError.Error))
 		}
 	}
 

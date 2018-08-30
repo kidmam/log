@@ -2,7 +2,6 @@ package log
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"strings"
 	"testing"
@@ -10,7 +9,7 @@ import (
 
 func TestErrorNotLost(t *testing.T) {
 	formatter := &JSONFormatter{}
-	entry := WithField("error", errors.New("wild walrus"))
+	entry := WithField("error", fmt.Errorf("wild walrus"))
 
 	b, err := formatter.Format(entry)
 	if err != nil {
@@ -30,7 +29,7 @@ func TestErrorNotLost(t *testing.T) {
 
 func TestErrorNotLostOnFieldNotNamedError(t *testing.T) {
 	formatter := &JSONFormatter{}
-	entry := WithField("omg", errors.New("wild walrus"))
+	entry := WithField("omg", fmt.Errorf("wild walrus"))
 
 	b, err := formatter.Format(entry)
 	if err != nil {

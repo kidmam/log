@@ -2,7 +2,7 @@ package log
 
 import (
 	"bytes"
-	"errors"
+	"fmt"
 	"strings"
 	"testing"
 	"time"
@@ -66,7 +66,7 @@ func TestEscaping_Interface(t *testing.T) {
 		expected string
 	}{
 		{ts.Format(defaultTimestampFormat), ts.Format(defaultTimestampFormat)},
-		{errors.New("error: something went wrong"), "\"error: something went wrong\""},
+		{fmt.Errorf("error: something went wrong"), "\"error: something went wrong\""},
 	}
 
 	for _, tc := range testCases {
